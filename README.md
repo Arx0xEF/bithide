@@ -1,8 +1,8 @@
 # Bithide – A Primitive BMP Steganography Tool
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green)](https://github.com/MasterBruce/bmp-stego/blob/main/LICENSE)
-[![Status: WIP](https://img.shields.io/badge/Status-WIP-orange)](https://github.com/MasterBruce/bmp-stego)
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue?logo=github)](https://github.com/MasterBruce/bmp-stego)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green)](https://github.com/Arx0xEF/bithide/blob/main/LICENSE)
+[![Status: WIP](https://img.shields.io/badge/Status-WIP-orange)](https://github.com/Arx0xEF/bithide)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue?logo=github)](https://github.com/Arx0xEF/bithide)
 
 ---
 
