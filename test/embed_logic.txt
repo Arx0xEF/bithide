@@ -1,0 +1,83 @@
+/* Flawed logic (first try)
+
+0110 1101             pixel_data
+1111 1110  & (AND)    0xFE
+---------
+0110 1100   Eureka!
+
+int bit;
+int p = 0;
+int pos = 7;
+for(size_t i = 0; i < p_d_size; i++) {
+    bmp_buff[i] &= 0xFE; // clears the LSB of pixel data
+    if(pos >= 0) {
+        bit = (txt_buff[p] >> pos--) & 1;
+        /*
+            = (1110 1001 >> 7) & 1
+            = 1 & 1
+            = 1
+        */
+        bmp_buff[i] |= bit;
+        /*
+            0110 1100
+            0000 0001 | (OR)
+            ---------
+            0110 1101
+        */
+    }
+    pos = 7;
+    p+=8;
+}
+*/
+
+/* Working logic (second try)
+0110 1101             pixel_data
+1111 1110  & (AND)    0xFE
+---------
+0110 1100   Eureka!
+
+size_t total_bits = txt_size * 8;
+size_t max_bits   = p_d_size;
+size_t bits_to_embed = (total_bits < max_bits) ? total_bits : max_bits;
+
+
+int bit;
+int p = 0;
+int pos = 7;
+for(size_t i = 0; i < bits_to_embed; i++) {
+    bmp_buff[i] &= 0xFE; // clears the LSB of pixel data
+    bit = (txt_buff[p] >> pos--) & 1;
+    /*
+        = (1110 1001 >> pos) & 1
+        = 1 & 1
+        = 1
+    */
+    bmp_buff[i] |= bit;
+    /*
+        0110 1100
+        0000 0001 | (OR)
+        ---------
+        0110 1101
+    */
+    if(pos < 0) {
+        pos = 7;
+        p++;
+    }
+}
+*/
+
+
+/* a good automatic logic by clanker 
+
+for (size_t i = 0; i < bits_to_embed; i++) {
+/* gosh, these bit manipulation forumlaes are amazing */
+    int byte_index = i / 8;
+    int bit_pos    = 7 - (i % 8);
+
+    int bit = (txt_buff[byte_index] >> bit_pos) & 1;
+
+    bmp_buff[i] &= 0xFE;
+    bmp_buff[i] |= bit;
+}
+
+*/
